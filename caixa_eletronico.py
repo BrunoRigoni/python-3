@@ -9,6 +9,8 @@ def separator_saldo():
 saldo = float(10)
 saldo_real = round(saldo, 2)
 
+extrato = []
+
 
 def mostrarSaldo():
     print(f"O saldo atual da conta é de: R$ {saldo_real} ".replace(".", ","))
@@ -59,6 +61,8 @@ while option != 5:
                     f"Valor de {str(deposito).replace(".", ",")} depositado com sucesso.")
                 sub_option = str(
                     input("Aperte ENTER para voltar ao menu principal"))
+                extrato.append(
+                    f"Depósito: +{str(deposito).replace('.', ',')} R$")
 
             else:
                 print("Deposito inválido, digite um valor válido.")
@@ -87,11 +91,20 @@ while option != 5:
                 print(f"É possivel realizar o saque")
                 saldo_real -= saque
                 print(
-                    f"Foi sacado o valor de {str(saque).replace(".", ",")} R$ e restou na conta {str(saldo_real).replace(".", ",")} R$")
+                    f"Foi sacado o valor de {str(saque).replace(".", ",")} R$ e restou na conta {str(saldo_real).
+                                                                                                 replace(".", ",")} R$")
+
+                extrato.append(f"Saque: -{str(saque).replace('.', ',')} R$")
 
                 sub_option = str(input("Aperte ENTER para voltar ao menu"))
     elif option == 4:
-        print(f"Opção 4")
+        separator()
+        print("Extrato da conta:")
+        for transacao in extrato:
+            print(transacao)
+        separator()
+        input("Aperte ENTER para voltar ao menu principal")
+
     elif option == 5:
         print(f"Aplicação encerrada...")
 
