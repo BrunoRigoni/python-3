@@ -62,7 +62,7 @@ while option != 5:
                 sub_option = str(
                     input("Aperte ENTER para voltar ao menu principal"))
                 extrato.append(
-                    f"Depósito: +{str(deposito).replace('.', ',')} R$")
+                    f"Depósito: +{str(deposito).replace('.', ',')} R$ --- {str(saldo_real).replace('.', ',')} R$")
 
             else:
                 print("Deposito inválido, digite um valor válido.")
@@ -94,13 +94,15 @@ while option != 5:
                     f"Foi sacado o valor de {str(saque).replace(".", ",")} R$ e restou na conta {str(saldo_real).
                                                                                                  replace(".", ",")} R$")
 
-                extrato.append(f"Saque: -{str(saque).replace('.', ',')} R$")
+                extrato.append(
+                    f"Saque: -{str(saque).replace('.', ',')} R$ --- {str(saldo_real).replace('.', ',')} R$")
 
                 sub_option = str(input("Aperte ENTER para voltar ao menu"))
     elif option == 4:
         separator()
         print("Extrato da conta:")
         for transacao in extrato:
+            print(f"Saldo inicial: {str(saldo).replace(".", ",")}")
             print(transacao)
         separator()
         input("Aperte ENTER para voltar ao menu principal")
@@ -109,4 +111,4 @@ while option != 5:
         print(f"Aplicação encerrada...")
 
     else:
-        print("Digite uma opção válida.")
+        print("Invalido. Digite uma opção válida.")
