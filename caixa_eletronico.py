@@ -90,3 +90,10 @@ while option != 5:
                     f"Foi sacado o valor de {str(saque).replace(".", ",")} R$ e restou na conta {str(saldo_real).replace(".", ",")} R$")
 
                 sub_option = str(input("Aperte ENTER para voltar ao menu"))
+    elif option == 4:
+        print(f"Opção 4")
+    elif option == 5:
+        print(f"Aplicação encerrada...")
+
+    else:
+        print("Digite uma opção válida.")
