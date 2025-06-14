@@ -23,19 +23,24 @@ while True:
 
     if option == 1:
 
-        novo_produto = input("Digite o produto que deseja adicionar: ")
-        novo_produto = estoque.append(novo_produto)
+        novo_produto = input("Digite o produto que deseja adicionar: ").lower()
+        estoque.append(novo_produto)
         mostrar_produto()
 
     elif option == 2:
-        remover_produto = input("DIGITE O PRODUTO QUE DESEJA REMOVER: ")
+        remover_produto = input(
+            "DIGITE O PRODUTO QUE DESEJA REMOVER: ").lower()
         if remover_produto in estoque:
-            estoque = estoque.remove(remover_produto)
+            estoque.remove(remover_produto)
             print(f"O produto {remover_produto}")
 
     elif option == 3:
         mostrar_produto()
         input("Aperte ENTER para voltar ao menú principal")
 
-    if option == 4:
+    elif option == 4:
+        print("SAINDO DO ESTOQUE...")
         break
+
+    else:
+        print("Opção inválida!")
