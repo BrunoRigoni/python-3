@@ -101,8 +101,8 @@ while option != 5:
     elif option == 4:
         separator()
         print("Extrato da conta:")
+        print(f"Saldo inicial: {str(saldo).replace(".", ",")}")
         for transacao in extrato:
-            print(f"Saldo inicial: {str(saldo).replace(".", ",")}")
             print(transacao)
         separator()
         input("Aperte ENTER para voltar ao menu principal")
