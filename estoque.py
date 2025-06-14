@@ -32,7 +32,7 @@ while True:
             "DIGITE O PRODUTO QUE DESEJA REMOVER: ").lower()
         if remover_produto in estoque:
             estoque.remove(remover_produto)
-            print(f"O produto {remover_produto}")
+            print(f"O produto {remover_produto} foi adicionado com sucesso!")
 
     elif option == 3:
         mostrar_produto()
