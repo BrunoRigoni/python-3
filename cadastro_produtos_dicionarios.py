@@ -13,7 +13,15 @@ produtos = {
     "ovos": {
         "granja": 30,
         "caipira": 60,
-    }
+    },
+    "leite": {''
+              'longa vida': 10,
+              'ninho': 10,
+              'zero lactose': 5
+              },
+    "higiene": {'antitranspirante masculino': 10, 'antitranspirante feminino': 10},
+    "limpeza": {'veja': 10, 'detergente': 6, 'sabão em pó': 10},
+    "padaria": {'pão de forma': 10, 'pão de hot-dog': 10}
 
 
 }
