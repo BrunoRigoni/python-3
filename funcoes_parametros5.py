@@ -21,3 +21,15 @@ novo_item = input("DIGITE O ITEM QUE DESEJA ATUALIZAR: ")
 novo_valor = input("DIGITE O VALOR DO ITEM QUE DESEJA ATUALIZAR: ")
 
 atualizar_itens(mochila, novo_item, novo_valor)
+
+
+def remover_item(dic, chaves):
+    if chaves in dic:
+        dic.pop(chaves)
+        print(f"O item {chaves} foi removido")
+
+
+item_remover = input("DIGITE O ITEM QUE DESEJA REMOVER: ")
+
+remover_item(mochila, item_remover)
+mostrar_itens(mochila)
