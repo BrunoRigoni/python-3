@@ -14,13 +14,19 @@ def register_new_user():
     new_user_id = random.randint(1, 1000)
     new_user_name = input("Digite o nome de usuario: ")
 
+    print("Digite um valor correto.")
+
     for user in users:
         if user[name] == new_user_name:
             print("Usuario ja existe.")
-            return
-
-    new_password = getpass.getpass("Digite a senha do usuario: ")
-    confirm_password = getpass.getpass("Confirme a senha do usuario: ")
+        return
+    try:
+        new_password = getpass.getpass("Digite a senha do usuario: ")
+        confirm_password = getpass.getpass("Confirme a senha do usuario: ")
+    except Exception as erro:
+        print(f"Erro ao capturar senha: {erro}")
+        input("ENTER para volar ao menú principal")
+        return
 
     if confirm_password != new_password:
         print("As senhas precisam ser iguais!")
@@ -39,7 +45,7 @@ def register_new_user():
 def show_all_users():
     for show_user in users:
         print(
-            f" id: {show_user[id]}\n nome: {show_user[name]}\n senha: {show_user[password]}\n{"*" * 80}")
+            f" id: {show_user[id]}\n nome: {show_user[name]}\n senha: {show_user[password]}")
 
 
 def sep(sepstr):
@@ -60,7 +66,17 @@ while option != 5:
     print("[4] DELETAR USUARIO")
     print("[5] SAIR")
     sep("-")
-    option = int(input("DIGITE A OPÇÃO QUE DESEJA REALIZAR: "))
+    try:
+        option = int(input("DIGITE A OPÇÃO QUE DESEJA REALIZAR: "))
+    except ValueError:
+        sep("*")
+        sep("*")
+        sep("*")
+        print("Não foi possivel obter a opção. Digite apenas números.")
+        sep("*")
+        sep("*")
+        sep("*")
+        continue
     sep("")
     if option == 1:
         register_new_user()
@@ -69,6 +85,7 @@ while option != 5:
         print("AQUI ESTÁ A LISTA DE USUÁRIOS:")
         sep("/")
         show_all_users()
+        sep("/")
         input("ENTER PARA VOLTAR AO MENÚ PRINCIPAL.")
     elif option == 3:
         print("CADASTRO DE USUARIO")
