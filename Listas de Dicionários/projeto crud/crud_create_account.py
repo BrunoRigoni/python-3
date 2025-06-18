@@ -1,0 +1,82 @@
+import getpass
+import random
+
+users = []
+user = {}
+
+
+id = "id"
+name = "name"
+password = "password"
+
+
+def register_new_user():
+    new_user_id = random.randint(1, 1000)
+    new_user_name = input("Digite o nome de usuario: ")
+
+    for user in users:
+        if user[name] == new_user_name:
+            print("Usuario ja existe.")
+            return
+
+    new_password = getpass.getpass("Digite a senha do usuario: ")
+    confirm_password = getpass.getpass("Confirme a senha do usuario: ")
+
+    if confirm_password != new_password:
+        print("As senhas precisam ser iguais!")
+        return
+
+    user = {
+        "id": new_user_id,
+        "name": new_user_name,
+        "password": new_password,
+    }
+
+    users.append(user)
+    print("Usuario criado com sucesso!")
+
+
+def show_all_users():
+    for show_user in users:
+        print(
+            f" id: {show_user[id]}\n nome: {show_user[name]}\n senha: {show_user[password]}\n{"*" * 80}")
+
+
+def sep(sepstr):
+    print(sepstr * 80)
+
+
+option = 0
+
+while option != 5:
+    sep("*")
+    print("BEM VINDO AO CADASTRO DE USUARIOS.")
+    sep("")
+    sep("")
+    sep("-")
+    print("[1] CADASTRO DE NOVO USUÁRIO")
+    print("[2] CONSULTAR PERFIL")
+    print("[3] ALTERAR SENHA")
+    print("[4] DELETAR USUARIO")
+    print("[5] SAIR")
+    sep("-")
+    option = int(input("DIGITE A OPÇÃO QUE DESEJA REALIZAR: "))
+    sep("")
+    if option == 1:
+        register_new_user()
+        input("ENTER PARA VOLTAR AO MENÚ PRINCIPAL.")
+    elif option == 2:
+        print("AQUI ESTÁ A LISTA DE USUÁRIOS:")
+        sep("/")
+        show_all_users()
+        input("ENTER PARA VOLTAR AO MENÚ PRINCIPAL.")
+    elif option == 3:
+        print("CADASTRO DE USUARIO")
+    elif option == 4:
+        print("CADASTRO DE USUARIO")
+    elif option == 5:
+        print("APLICAÇÃO ENCERRADA.")
+
+    else:
+        print("DIGITE UMA OPÇÃO VÁLIDA!")
+        input("ENTER para voltar ao menú principal.")
