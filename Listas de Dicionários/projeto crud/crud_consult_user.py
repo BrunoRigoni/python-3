@@ -48,10 +48,9 @@ def show_all_users():
             f"AQUI ESTÁ A LISTA DE USUÁRIOS:\n{"-" * 80}\n id: {show_user[id]}\n nome: {show_user[name]}\n senha: {show_user[password]}\n{"*" * 80}\n")
 
 
-show_all_users()
-
-
 def remove_user():
+    for user in users:
+        print(f"ID: {user["id"]} -> nome: {user["name"]}")
 
     try:
         user_remove_id = int(
