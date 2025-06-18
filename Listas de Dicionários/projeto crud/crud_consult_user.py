@@ -49,3 +49,28 @@ def show_all_users():
 
 
 show_all_users()
+
+
+def remove_user():
+
+    try:
+        user_remove_id = int(
+            input("Digite a ID do usuario que deseja remover:"))
+    except ValueError:
+        print(f"Erro, por favor digite um número válido.")
+        return
+
+    for user in users:
+        if user["id"] == user_remove_id:
+            users.remove(user)
+            print(
+                f" O usuario ID: {user_remove_id} foi removido com sucesso.  ")
+            return
+
+        print(
+            f"O ID: {user_remove_id} não foi encontrado! Digite um ID válido.")
+
+
+remove_user()
+
+show_all_users()

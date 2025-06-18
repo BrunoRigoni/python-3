@@ -48,6 +48,26 @@ def show_all_users():
             f" id: {show_user[id]}\n nome: {show_user[name]}\n senha: {show_user[password]}")
 
 
+def remove_user():
+
+    try:
+        user_remove_id = int(
+            input("Digite a ID do usuario que deseja remover:"))
+    except ValueError:
+        print(f"Erro, por favor digite um número válido.")
+        return
+
+    for user in users:
+        if user["id"] == user_remove_id:
+            users.remove(user)
+            print(
+                f" O usuario ID: {user_remove_id} foi removido com sucesso.  ")
+            return
+
+        print(
+            f"O ID: {user_remove_id} não foi encontrado! Digite um ID válido.")
+
+
 def sep(sepstr):
     print(sepstr * 80)
 
@@ -82,14 +102,15 @@ while option != 5:
         register_new_user()
         input("ENTER PARA VOLTAR AO MENÚ PRINCIPAL.")
     elif option == 2:
-        print("AQUI ESTÁ A LISTA DE USUÁRIOS:")
+        print("AQUI ESTÁ A LISTA DE USUÁRIOS: ")
         sep("/")
         show_all_users()
         sep("/")
         input("ENTER PARA VOLTAR AO MENÚ PRINCIPAL.")
     elif option == 3:
-        print("CADASTRO DE USUARIO")
+        print("ALTERAR SENHA")
     elif option == 4:
+        remove_user()
         print("CADASTRO DE USUARIO")
     elif option == 5:
         print("APLICAÇÃO ENCERRADA.")
