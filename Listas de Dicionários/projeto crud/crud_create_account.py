@@ -1,13 +1,32 @@
 import getpass
 import random
+import os
+import json
 
 users = []
-user = {}
-
+DATA_FILE = 'users.json'
 
 id = "id"
 name = "name"
 password = "password"
+
+
+def clear_screen():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+
+def save_users():
+    with open(DATA_FILE, 'w') as file:
+        json.dump(users, file, indent=4)
+
+
+def load_users():
+    global users
+    try:
+        with open(DATA_FILE, 'r') as file:
+            users = json.load(file)
+    except FileNotFoundError:
+        users = []
 
 
 def register_new_user():
@@ -15,7 +34,7 @@ def register_new_user():
     new_user_name = input("Digite o nome de usuario: ")
 
     for user in users:
-        if user[name] == new_user_name:
+        if user["name"] == new_user_name:
             print("Usuario ja existe.")
             return
     try:
@@ -37,13 +56,43 @@ def register_new_user():
     }
 
     users.append(user)
+    save_users()
     print("Usuario criado com sucesso!")
 
 
 def show_all_users():
     for show_user in users:
         print(
-            f" id: {show_user[id]}\n nome: {show_user[name]}\n senha: {show_user[password]}")
+            f" id: {show_user[id]}\n nome: {show_user[name]}\n senha: ****")
+
+
+def new_password():
+    for user in users:
+        print(f"ID: {user["id"]} -> nome: {user["name"]}")
+    try:
+        user_id = int(
+            input("Digite o ID do usuario que deseja alterar a senha: "))
+    except ValueError:
+        print("Digite um número válido.")
+        return
+    for user in users:
+        if user["id"] == user_id:
+            try:
+                new_pass = getpass.getpass("Digite a nova senha: ")
+                new_pass_confirm = getpass.getpass("Confirme a nova senha: ")
+            except Exception as erro:
+                print(f"Erro ao capturar uma nova senha: {erro}")
+                input("ENTER para volar ao menú principal")
+                return
+
+            if new_pass == new_pass_confirm:
+                user["password"] = new_pass
+                save_users()
+                print(f"Senha alterada com sucesso.")
+            else:
+                print("As senhas devem corresponder")
+            return
+    print("ID não encontrado! ")
 
 
 def remove_user():
@@ -60,12 +109,13 @@ def remove_user():
     for user in users:
         if user["id"] == user_remove_id:
             users.remove(user)
+            save_users()
             print(
                 f" O usuario ID: {user_remove_id} foi removido com sucesso.  ")
             return
 
-        print(
-            f"O ID: {user_remove_id} não foi encontrado! Digite um ID válido.")
+    print(
+        f"O ID: {user_remove_id} não foi encontrado! Digite um ID válido.")
 
 
 def sep(sepstr):
@@ -73,6 +123,7 @@ def sep(sepstr):
 
 
 option = 0
+load_users()
 
 while option != 5:
     sep("*")
@@ -101,20 +152,27 @@ while option != 5:
     if option == 1:
         register_new_user()
         input("ENTER PARA VOLTAR AO MENÚ PRINCIPAL.")
+        clear_screen()
     elif option == 2:
         print("AQUI ESTÁ A LISTA DE USUÁRIOS: ")
         sep("/")
         show_all_users()
         sep("/")
         input("ENTER PARA VOLTAR AO MENÚ PRINCIPAL.")
+        clear_screen()
     elif option == 3:
-        print("ALTERAR SENHA")
+        new_password()
+        input("ENTER PARA VOLTAR AO MENÚ PRINCIPAL.")
+        clear_screen()
     elif option == 4:
         remove_user()
         input("ENTER PARA VOLTAR AO MENÚ PRINCIPAL.")
+        clear_screen()
     elif option == 5:
         print("APLICAÇÃO ENCERRADA.")
+        quit()
 
     else:
         print("DIGITE UMA OPÇÃO VÁLIDA!")
         input("ENTER para voltar ao menú principal.")
+        clear_screen()

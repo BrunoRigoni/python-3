@@ -73,3 +73,31 @@ def remove_user():
 remove_user()
 
 show_all_users()
+
+
+def new_password():
+    try:
+        user_id = int(
+            input("Digite o ID do usuario que deseja alterar a senha: "))
+    except ValueError:
+        print("Digite um número válido.")
+        return
+    for user in users:
+        if user["id"] == user_id:
+            try:
+                new_pass = getpass.getpass("Digite a nova senha: ")
+                new_pass_confirm = getpass.getpass("Confirme a nova senha: ")
+            except Exception as erro:
+                print(f"Erro ao capturar uma nova senha: {erro}")
+                input("ENTER para volar ao menú principal")
+                return
+
+            if new_pass == new_pass_confirm:
+                user["password"] = new_pass
+                print(f"Senha alterada com sucesso.")
+            else:
+                print("As senhas devem corresponder")
+                return
+
+
+new_password()
