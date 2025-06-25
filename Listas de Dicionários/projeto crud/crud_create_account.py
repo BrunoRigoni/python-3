@@ -29,8 +29,15 @@ def load_users():
         users = []
 
 
+def generate_new_id():
+    if users:
+        return max(user["id"] for user in users) + 1
+    else:
+        return 1
+
+
 def register_new_user():
-    new_user_id = random.randint(1, 1000)
+    new_user_id = generate_new_id()
     new_user_name = input("Digite o nome de usuario: ")
 
     for user in users:
